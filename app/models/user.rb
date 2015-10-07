@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   include User::Json
+  include User::Authentication
 
   validate :username_valid, if: :username_changed?
   validates_uniqueness_of :username, allow_blank: true, allow_nil: true, case_sensitive: false,
