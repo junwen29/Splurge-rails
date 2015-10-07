@@ -195,7 +195,7 @@ module Splurge
 
     def standard_error(e)
       Rails.logger.error e.message
-      Rollbar.error e
+      # Rollbar.error e
       render_error_response(:internal_server_error)
     end
 
@@ -204,7 +204,7 @@ module Splurge
     end
 
     def active_record_error(e)
-      Rollbar.error e
+      # Rollbar.error e
       render_error_response(:internal_server_error, e.message)
     end
 
@@ -257,7 +257,7 @@ module Splurge
 
     def standard_error(e)
       Rails.logger.error e.message
-      Rollbar.error e
+      # Rollbar.error e
       render_error_response(:internal_server_error)
     end
 
@@ -267,7 +267,7 @@ module Splurge
 
     def active_record_error(e)
       Rails.logger.error e.message
-      Rollbar.error e
+      # Rollbar.error e
       render_error_response(:internal_server_error)
     end
 
