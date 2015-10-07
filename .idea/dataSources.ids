@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Rails Splurge: development" uuid="612e5a2f-fdcb-43ee-8abf-bcbb2b65ad29">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails Splurge: test" uuid="00a2d992-3aeb-4784-96f3-2616032edb0b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails Splurge: production" uuid="3ce39f7d-8e6b-4feb-a78a-48ab989c98c9">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>
