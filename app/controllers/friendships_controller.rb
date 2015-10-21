@@ -20,7 +20,7 @@ class FriendshipsController < ApplicationController
   # GET /friendships/1/edit
   def edit
   end
-x
+
   # POST /friendships
   # POST /friendships.json
   def create
