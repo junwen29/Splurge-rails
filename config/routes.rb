@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     end
 
     scope '/friendship' do
-      post 'create' => 'friendship#create'
-      delete 'delete' => 'friendship#destroy'
+      post '/create' => 'friendships#create'
+      delete '/delete' => 'friendships#destroy'
     end
   end
 
