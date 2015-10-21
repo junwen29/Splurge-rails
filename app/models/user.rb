@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, allow_blank: true, allow_nil: true, case_sensitive: false,
                           message: "%{value} is already taken", if: :username_changed?
 
+  has_many :friendships
+  has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+
+  has_many :active_friends, -> { where(friendships: { approved: true}) }, :through => :friendships, :source => :friend
+  has_many :passive_friends, -> { where(friendships: { approved: true}) }, :through => :passive_friendships, :source => :user
+  has_many :pending_friends, -> { where(friendships: { approved: false}) }, :through => :friendships, :source => :friend
+  has_many :requested_friendships, -> { where(friendships: { approved: false}) }, :through => :passive_friendships, :source => :user
+
   def username_valid
     return if username.nil?
     return errors.add(:username, "can't be blank") if username.blank?
@@ -23,6 +31,10 @@ class User < ActiveRecord::Base
     return errors.add(:username, "can't be all numbers") if all_numbers
     invalid_characters = (username =~ Regexp.new('^[' + valid_characters + '0-9]+$')).nil?
     return errors.add(:username, 'can only contain letters, numbers, and underscore') if invalid_characters
+  end
+
+  def friends
+    active_friends | passive_friends
   end
 
 end
