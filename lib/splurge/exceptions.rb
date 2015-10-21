@@ -18,6 +18,18 @@ module Splurge
       end
     end
 
+    class FriendRequestExistsError < SplurgeError
+      def initialize(message = "The user has already sent a similar friend request.")
+        super(:existing_error, "Existing Error", 406, message)
+      end
+    end
+
+    class FriendDoesNotExistsError < SplurgeError
+      def initialize(message = "The user has requested a non-existing user")
+        super(:existing_error, "Not Found", 404, message)
+      end
+    end
+
 
   end
 end

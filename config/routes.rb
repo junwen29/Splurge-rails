@@ -4,15 +4,16 @@ Rails.application.routes.draw do
   devise_scope :user do
     scope '/accounts' do
       # post 'registrations' => 'registrations#create', :as => 'register'
-      post '/sign_in' => 'sessions#create'
-      delete '/sign_out' => 'sessions#destroy'
-      post '/sign_up' => 'registrations#create'
-      get '/friends' => 'friendship#index'
+      post    '/sign_in'  => 'sessions#create'
+      delete  '/sign_out' => 'sessions#destroy'
+      post    '/sign_up'  => 'registrations#create'
+      get     '/friends'  => 'friendship#index'
     end
 
     scope '/friendship' do
-      post 'create' => 'friendship#create'
-      delete 'delete' => 'friendship#destroy'
+      get     '/index'   => 'friendships#index'
+      post    '/create'  => 'friendships#create'
+      delete  '/delete'  => 'friendships#destroy'
     end
   end
 
