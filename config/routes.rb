@@ -7,9 +7,14 @@ Rails.application.routes.draw do
       post '/sign_in' => 'sessions#create'
       delete '/sign_out' => 'sessions#destroy'
       post '/sign_up' => 'registrations#create'
+      get '/friends' => 'friendship#index'
+    end
+
+    scope '/friendship' do
+      post 'create' => 'friendship#create'
+      delete 'delete' => 'friendship#destroy'
     end
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
