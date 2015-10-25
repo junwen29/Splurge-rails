@@ -1,11 +1,27 @@
 class FriendshipsController < ApplicationController
-  before_action :set_friendship, only: [:show, :edit, :update, :destroy]
+  before_action :set_friendship, only: [:show, :edit]
 
-  # GET /friendships
-  # GET /friendships.json
-  def index
+  # get an index of the friends that the user request friendship to
+  def pending
     user = User.find_by_authentication_token(params[:auth_token])
     friends = user.pending_friends
+    render_jbuilders(friends) do |json,friend|
+      friend.to_json json
+    end
+  end
+
+  # get an index of the friends that request friendship to the user
+  def requests
+    user = User.find_by_authentication_token(params[:auth_token])
+    friends = user.requested_friendships
+    render_jbuilders(friends) do |json,friend|
+      friend.to_json json
+    end
+  end
+
+  def friends
+    user = User.find_by_authentication_token(params[:auth_token])
+    friends = user.friends
     render_jbuilders(friends) do |json,friend|
       friend.to_json json
     end
@@ -48,35 +64,45 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /friendships/1
-  # PATCH/PUT /friendships/1.json
   def update
 
-    @friendship = Friendship.where(friend_id: current_user, user_id: params[:id]).first
+    @friendship = Friendship.where(friend_id: params[:user_id], user_id: params[:friend_id]).first
     @friendship.update(approved: true)
 
-
-    respond_to do |format|
-      if @friendship.save
-        # format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
-        format.json { render :show, status: :ok, location: @friendship }
-      else
-        # format.html { render :edit }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
-      end
+    if @friendship.save
+      head_ok
+    else
+      render_error_json FriendRequestApproveError.new
     end
+
+
+    # respond_to do |format|
+    #   if @friendship.save
+    #     # format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @friendship }
+    #   else
+    #     # format.html { render :edit }
+    #     format.json { render json: @friendship.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /friendships/1
   # DELETE /friendships/1.json
   def destroy
-    @friendship = Friendship.where(friend_id: [current_user, params[:id]]).where(user_id: [current_user, params[:id]]).last
+    @friendship = Friendship.where(friend_id: [params[:user_id], params[:friend_id]]).where(user_id: [params[:user_id], params[:friend_id]]).last
     @friendship.destroy
 
-    respond_to do |format|
-      # format.html { redirect_to friendships_url, notice: 'Friendship was successfully destroyed.' }
-      format.json { head :no_content }
+    if @friendship.destroy
+      head_ok
+    else
+      render_error_json FriendRequestApproveError.new
     end
+
+    # respond_to do |format|
+    #   format.html { redirect_to friendships_url, notice: 'Friendship was successfully destroyed.' }
+      # format.json { head :no_content }
+    # end
   end
 
   private
