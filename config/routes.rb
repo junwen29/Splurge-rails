@@ -12,8 +12,12 @@ Rails.application.routes.draw do
 
     scope '/friendship' do
       get     '/pending'   => 'friendships#pending'
+      get     '/requests'   => 'friendships#requests'
+      get     '/friends'   => 'friendships#friends'
+
       post    '/create'  => 'friendships#create'
-      delete  '/delete'  => 'friendships#destroy'
+      put    '/approve' => 'friendships#update'
+      delete  '/reject'  => 'friendships#destroy'
     end
   end
 

@@ -30,6 +30,17 @@ module Splurge
       end
     end
 
+    class FriendRequestApproveError < SplurgeError
+      def initialize(message = "Unable to Approve Friend")
+        super(:bad_request, "Bad Request", 400, message)
+      end
+    end
+
+    class FriendRequestRejectError < SplurgeError
+      def initialize(message = "Unable to Reject Friend")
+        super(:bad_request, "Bad Request", 400, message)
+      end
+    end
 
   end
 end
