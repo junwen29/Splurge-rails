@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
 
     scope '/friendship' do
-      get     '/index'   => 'friendships#index'
+      get     '/pending'   => 'friendships#pending'
       post    '/create'  => 'friendships#create'
       delete  '/delete'  => 'friendships#destroy'
     end

@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
 
   # GET /friendships
   # GET /friendships.json
-  def index
+  def pending
     user = User.find_by_authentication_token(params[:auth_token])
     friends = user.pending_friends
     render_jbuilders(friends) do |json,friend|
