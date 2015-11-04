@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get     '/friends'  => 'friendship#index'
     end
 
+    # api for friendships
     scope '/friendship' do
       get     '/pending'   => 'friendships#pending'
       get     '/requests'   => 'friendships#requests'
@@ -19,6 +20,15 @@ Rails.application.routes.draw do
       put    '/approve' => 'friendships#update'
       delete  '/reject'  => 'friendships#destroy'
     end
+
+    #api for expeneses
+    scope '/expenses' do
+      get '/debts' => 'expenses#debts'
+      get '/lends' => 'expenses#lends'
+
+      post '/create' => 'expenses#create'
+    end
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
