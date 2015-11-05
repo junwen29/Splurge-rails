@@ -32,6 +32,12 @@ Rails.application.routes.draw do
       put '/settle' => 'expenses#update'
     end
 
+    # api for trips
+    scope '/trips' do
+      post '' => 'trips#create'
+
+    end
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
