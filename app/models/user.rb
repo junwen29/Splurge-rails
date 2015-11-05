@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   has_many :unpaid_debts, -> { where(expenses: { isSettled: false}) }, :class_name => 'Expense', :foreign_key => 'borrower_id'
   has_many :unpaid_lends, -> { where(expenses: { isSettled: false}) }, :class_name => 'Expense', :foreign_key => 'spender_id'
 
+  #trips
+  has_many :trips
+
   def username_valid
     return if username.nil?
     return errors.add(:username, "can't be blank") if username.blank?

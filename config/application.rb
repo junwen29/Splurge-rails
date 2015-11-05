@@ -21,10 +21,15 @@ module Splurge
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    # config.active_record.raise_in_transactional_callbacks = true
+
+    # load service layer
+    config.autoload_paths += Dir["#{config.root}/app/services/**/"]
+    # config.autoload_paths += %W(#{config.root}/app/services)
 
     # load api helpers
     config.autoload_paths += Dir["#{config.root}/lib"]
     config.autoload_paths += Dir["#{config.root}/lib/splurge"]
+
   end
 end
