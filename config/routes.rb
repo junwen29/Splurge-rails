@@ -26,8 +26,10 @@ Rails.application.routes.draw do
       get '/debts' => 'expenses#debts'
       get '/all_debts' => 'expenses#all_debts'
       get '/lends' => 'expenses#lends'
+      get '/all_lends' => 'expenses#all_lends'
 
       post '/create' => 'expenses#create'
+      put '/settle' => 'expenses#update'
     end
 
   end

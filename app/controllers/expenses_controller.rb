@@ -41,4 +41,21 @@ class ExpensesController < ApplicationController
 
   end
 
+  def all_lends
+    user = User.find(params[:user_id])
+    lends = user.lends
+
+    render_jbuilders(lends) do |json,lend|
+      lend.to_json json
+    end
+
+  end
+
+  def update
+    expense = Expense.find(params[:expense_id])
+    expense.update(isSettled: true)
+
+    head_ok
+  end
+
 end
