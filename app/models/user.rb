@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
   has_many :pending_friends, -> { where(friendships: { approved: false}) }, :through => :friendships, :source => :friend
   has_many :requested_friendships, -> { where(friendships: { approved: false}) }, :through => :passive_friendships, :source => :user
 
+  #expenses
+  has_many :debts, :class_name => 'Expense', :foreign_key => 'borrower_id'
+  has_many :lends, :class_name => 'Expense', :foreign_key => 'spender_id'
+
+  has_many :unpaid_debts, -> { where(expenses: { isSettled: false}) }, :class_name => 'Expense', :foreign_key => 'borrower_id'
+  has_many :unpaid_lends, -> { where(expenses: { isSettled: false}) }, :class_name => 'Expense', :foreign_key => 'spender_id'
+
   def username_valid
     return if username.nil?
     return errors.add(:username, "can't be blank") if username.blank?
