@@ -7,6 +7,7 @@ module Expense::Json
       json.id         self.id
       json.isSettled  self.isSettled
       json.amount     self.amount
+      json.created_at self.created_at.strftime("%Y-%m-%dT%H:%M:%SZ%Z")
 
       json.borrower do
         json.id       self.borrower.id

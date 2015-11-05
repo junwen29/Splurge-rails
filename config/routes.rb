@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     #api for expeneses
     scope '/expenses' do
       get '/debts' => 'expenses#debts'
+      get '/all_debts' => 'expenses#all_debts'
       get '/lends' => 'expenses#lends'
 
       post '/create' => 'expenses#create'

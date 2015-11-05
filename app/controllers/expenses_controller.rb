@@ -21,6 +21,16 @@ class ExpensesController < ApplicationController
 
   end
 
+  def all_debts
+    user = User.find(params[:user_id])
+    debts = user.debts
+
+    render_jbuilders(debts) do |json,debt|
+      debt.to_json json
+    end
+
+  end
+
   def lends
     user = User.find(params[:user_id])
     lends = user.unpaid_lends
