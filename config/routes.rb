@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     # api for trips
     scope '/trips' do
       post '' => 'trips#create'
-
+      get '' => 'trips#index'
     end
 
   end

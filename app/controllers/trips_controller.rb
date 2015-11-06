@@ -9,4 +9,14 @@ class TripsController < ApplicationController
     end
   end
 
+  def index
+    user = User.find(params[:user_id])
+    trips = user.trips
+
+    render_jbuilders(trips) do |json,trip|
+      trip.to_json(json)
+    end
+
+  end
+
 end
