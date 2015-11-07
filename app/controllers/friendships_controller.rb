@@ -58,6 +58,13 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(:friend_id => friend_id, approved: "false")
 
     if @friendship.save
+      tokens = DeviceService.tokens_by_user(friend_id)
+      notification = friend.notifications.create(item_type: 'friendship',
+                                                   item_id: @friendship.id,
+                                                   item_name: 'Friend Request',
+                                                   message: friend.username.to_s + ' wants to be your friend!')
+
+      NotificationService.send_notification_by_user(notification.id, tokens)
       head_ok
     else
       render_error_json FriendRequestExistsError.new

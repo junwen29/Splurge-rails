@@ -55,6 +55,16 @@ class ExpensesController < ApplicationController
     expense = Expense.find(params[:expense_id])
     expense.update(isSettled: true)
 
+    borrower = expense.borrower
+    tokens = DeviceService.tokens_by_user(borrower.id)
+
+    notification = borrower.notifications.create(item_type: 'expenses',
+                                             item_id: expense.id,
+                                             item_name: 'Settlement',
+                                             message: 'Your debt with ' + expense.spender.username.to_s + ' is settled.')
+
+    NotificationService.send_notification_by_user(notification.id, tokens)
+
     head_ok
   end
 
