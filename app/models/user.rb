@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   #device
   has_many :devices, :dependent => :destroy
 
+  #notification
+  has_many :notifications, dependent: :destroy
 
   def username_valid
     return if username.nil?
