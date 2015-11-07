@@ -58,7 +58,7 @@ class ExpensesController < ApplicationController
     borrower = expense.borrower
     tokens = DeviceService.tokens_by_user(borrower.id)
 
-    notification = borrower.notifications.create(item_type: 'expenses',
+    notification = borrower.notifications.create(item_type: 'expense',
                                              item_id: expense.id,
                                              item_name: 'Settlement',
                                              message: 'Your debt with ' + expense.spender.username.to_s + ' is settled.')

@@ -44,6 +44,11 @@ Rails.application.routes.draw do
       delete '' => 'devices#destroy'
     end
 
+    # notifications api
+    scope 'notifications' do
+      get '' => "notifications#index_by_user"
+    end
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

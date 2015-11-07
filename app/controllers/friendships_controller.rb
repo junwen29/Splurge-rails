@@ -59,10 +59,11 @@ class FriendshipsController < ApplicationController
 
     if @friendship.save
       tokens = DeviceService.tokens_by_user(friend_id)
+      user = User.find(get_current_user_id)
       notification = friend.notifications.create(item_type: 'friendship',
                                                    item_id: @friendship.id,
                                                    item_name: 'Friend Request',
-                                                   message: friend.username.to_s + ' wants to be your friend!')
+                                                   message: user.username.to_s + ' wants to be your friend!')
 
       NotificationService.send_notification_by_user(notification.id, tokens)
       head_ok
