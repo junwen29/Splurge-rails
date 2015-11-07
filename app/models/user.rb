@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
   #trips
   has_many :trips
 
+  #device
+  has_many :devices, :dependent => :destroy
+
+
   def username_valid
     return if username.nil?
     return errors.add(:username, "can't be blank") if username.blank?

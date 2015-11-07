@@ -38,6 +38,12 @@ Rails.application.routes.draw do
       get '' => 'trips#index'
     end
 
+    ## to register device token
+    scope '/devices' do
+      post '' => 'devices#create'
+      delete '' => 'devices#destroy'
+    end
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
