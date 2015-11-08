@@ -3,7 +3,7 @@ class NotificationService
   module ClassMethods
 
     def send_notification_by_user(notification_id, tokens)
-      gcm = GCM.new("AIzaSyBzgA0kKjDsjhku4m1h0dox9QiER")
+      gcm = GCM.new("AIzaSyDQ0Cf2C--M6vpZBsj_CQHfmKeqPC3-_sc")
       notification = Notification.find(notification_id)
 
       options = {
